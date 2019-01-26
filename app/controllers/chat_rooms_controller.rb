@@ -1,6 +1,6 @@
 class ChatRoomsController < ApplicationController
   def index
-    @chat_rooms = ChatRoom.page(10)
+    @chat_rooms = ChatRoom.page(1).per(10)
   end
 
   def new
