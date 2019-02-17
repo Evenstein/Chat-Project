@@ -1,0 +1,17 @@
+= text_field_tag 'message', nil, placeholder: 'Enter your message here', crid: "#{chat_room.id}"
+= button_tag 'Send', type: 'button', class: 'btn btn-info send-message'
+
+javascript:
+  $(".send-message").on("click", function () {
+      console.log('click event');
+      $.ajax({
+          async: true,
+          url: '/messages',
+          type: 'POST',
+          data: {"chat_room_id" : $('#message').attr('crid')},
+          dataType: 'json',
+          success: function (result) {
+            window.reload();
+          }
+      })
+  });

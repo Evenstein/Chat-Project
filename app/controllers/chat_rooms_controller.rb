@@ -1,6 +1,8 @@
+# frozen_string_literal:true
+
 class ChatRoomsController < ApplicationController
   def index
-    @chat_rooms = ChatRoom.page(1).per(10)
+    @chat_rooms = ChatRoom.order(:title).page params[:page]
   end
 
   def new
@@ -13,12 +15,14 @@ class ChatRoomsController < ApplicationController
       flash[:success] = 'Chat room added!'
       redirect_to chat_rooms_path
     else
+      flash[:error] = 'Chat room creation fault'
       render 'new'
     end
   end
 
   def show
     @chat_room = ChatRoom.includes(:messages).find_by(id: params[:id])
+    @message = Message.new
   end
 
   private

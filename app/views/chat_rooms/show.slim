@@ -1,5 +1,8 @@
 h1
   = @chat_room.title
 
+= link_to "Back", :chat_rooms, class: 'btn btn-danger'
+
 #messages
   = render @chat_room.messages
+= render 'messages/new', chat_room: @chat_room, message: @message
