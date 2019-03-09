@@ -1,4 +1,4 @@
-= text_field_tag 'message', nil, placeholder: 'Enter your message here', crid: "#{chat_room.id}"
+= text_field_tag 'message', nil, placeholder: 'Enter your message here', crid: "#{chat_room.id}", uid: "#{current_user.id}"
 = button_tag 'Send', type: 'button', class: 'btn btn-info send-message'
 
 javascript:
@@ -8,10 +8,17 @@ javascript:
           async: true,
           url: '/messages',
           type: 'POST',
-          data: {"chat_room_id" : $('#message').attr('crid')},
+          data: {
+              user_id: $('#message').attr('uid'),
+              chat_room_id: $('#message').attr('crid'),
+              body: $('#message').val()
+          },
           dataType: 'json',
           success: function (result) {
             window.reload();
+          },
+          error: function (result) {
+            console.log(result);
           }
       })
   });

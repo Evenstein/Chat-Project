@@ -13,18 +13,17 @@ class MessagesController < ApplicationController
   end
 
   def create
-    chat_room = ChatRoom.find params[:chat_room_id]
-    @message = chat_room.messages.build(message_params)
+    @message = Message.new(message_params)
     if @message.save
       flash[:success] = 'Message created'
     else
       flash[:error] = 'Message creation fault'
     end
-    redirect_to chat_rooms_path
+    redirect_to chat_room_path(message_params[:chat_room_id])
   end
 
   private
     def message_params
-      params.require(:chat_room).permit(:id)
+      params.permit(:user_id, :chat_room_id, :body)
     end
 end
