@@ -3,22 +3,22 @@
 
 javascript:
   $(".send-message").on("click", function () {
-      console.log('click event');
-      $.ajax({
-          async: true,
-          url: '/messages',
-          type: 'POST',
-          data: {
-              user_id: $('#message').attr('uid'),
-              chat_room_id: $('#message').attr('crid'),
-              body: $('#message').val()
-          },
-          dataType: 'json',
-          success: function (result) {
-            window.reload();
-          },
-          error: function (result) {
-            console.log(result);
-          }
-      })
+    console.log('click event');
+    $.ajax({
+      async: true,
+      url: '/messages',
+      type: 'POST',
+      data: {
+        user_id: $('#message').attr('uid'),
+        chat_room_id: $('#message').attr('crid'),
+        body: $('#message').val()
+      },
+      dataType: 'json',
+      success: function (result) {
+        window.reload();
+      },
+      error: function (result) {
+        console.log(result);
+      }
+    })
   });

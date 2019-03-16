@@ -22,6 +22,12 @@ class MessagesController < ApplicationController
     redirect_to chat_room_path(message_params[:chat_room_id])
   end
 
+  def destroy
+    @message = Message.find(params[:id])
+    @message.destroy
+    redirect_back(fallback_location: :root)
+  end
+
   private
     def message_params
       params.permit(:user_id, :chat_room_id, :body)

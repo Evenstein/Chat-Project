@@ -4,5 +4,8 @@ h1
 = link_to "Back", :chat_rooms, class: 'btn btn-danger'
 
 #messages
-  = render @chat_room.messages
+  = render @messages
+  .float-md-center
+    = paginate @messages
+
 = render 'messages/new', chat_room: @chat_room, message: @message

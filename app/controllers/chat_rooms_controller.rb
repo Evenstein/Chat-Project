@@ -21,8 +21,8 @@ class ChatRoomsController < ApplicationController
   end
 
   def show
-    @chat_room = ChatRoom.includes(:messages).find_by(id: params[:id])
-    @message = Message.new
+    @chat_room = ChatRoom.find(params[:id])
+    @messages = Message.where(chat_room_id: params[:id]).order(updated_at: :desc).page(params[:page]).per(5)
   end
 
   private
